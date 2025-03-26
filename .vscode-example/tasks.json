@@ -1,0 +1,64 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build run browse",
+            "dependsOn": [
+                "build",
+                "iisexpress",
+                "browser"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\msbuild.exe",
+            "args": [
+                "${workspaceFolder}/SampleVSCodeNetFramework.Web/SampleVSCodeNetFramework.Web.csproj",
+                "/t:build",
+                "/p:GenerateFullPaths=true",
+                "/p:Configuration=Debug",
+                "/consoleloggerparameters:NoSummary",
+                "/p:Platform=\"AnyCPU\""
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "iisexpress",
+            "type": "shell",
+            "command": "C:\\Program Files\\IIS Express\\iisexpress.exe",
+            "args": [
+                // "/path:${workspaceRoot}\\SampleVSCode.Web",
+                // "/port:5006",
+                "/config:${workspaceRoot}\\SampleVSCodeNetFramework.Web\\applicationhost.config",
+                "/site:Default Web Site",
+                "/apppool:DefaultAppPool",
+                "/systray:true"
+            ],
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "browser",
+            "type": "shell",
+            "command": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+            "args": [
+                "https://localhost:44394"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
